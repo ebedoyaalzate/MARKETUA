@@ -12,7 +12,7 @@
   <ion-card *ngIf ="product">
     <ion-img [src]="product.images[0].URL"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle class="price">{{product.price | currency}}$</ion-card-subtitle>
+      <ion-card-subtitle class="price">{{product.price | currency}}</ion-card-subtitle>
       <ion-card-title class="title">{{product.name}}</ion-card-title>
       <ion-card-subtitle>{{product.seller.seller_name}}</ion-card-subtitle>
       <ion-card-subtitle> RATING: {{product.rating}}</ion-card-subtitle>

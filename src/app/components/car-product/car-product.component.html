@@ -1,17 +1,17 @@
 <ion-card class="card" *ngIf="product">
-  <ion-thumbnail slot="center">
+  <ion-thumbnail position="left" slot="center">
     <ion-img [src]="product.thumbnail"></ion-img>
   </ion-thumbnail>
   <ion-card-header class="header">
-    <ion-card-subtitle class="price">{{product.price | currency}}$</ion-card-subtitle>
     <ion-card-title class="title">{{product.name}}</ion-card-title>
+    <ion-card-subtitle class="price">{{product.price | currency}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content class="content">
     <div class="number-container">
-      <ion-button (click)="restUnits()">-</ion-button>
-      <div>{{units}}</div>
-      <ion-button (click)="addUnits()">+</ion-button>
-      <ion-button fill="outline" color="danger" (click)="deleteProduct()">
+      <ion-button class="restButton" (click)="restUnits()">-</ion-button>
+      <div class="units">{{units}}</div>
+      <ion-button name="addButton" (click)="addUnits()">+</ion-button>
+      <ion-button name="deleteButton" fill="outline" color="danger" (click)="deleteProduct()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </div>
