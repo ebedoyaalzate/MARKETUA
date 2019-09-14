@@ -30,7 +30,7 @@ export class CarProductComponent implements OnInit {
         }
       });
     });
-    this.productService.productDetail(this.id).subscribe(prod => {
+    this.productService.productDetailRuby(this.id).subscribe(prod => {
       this.product = prod;
     });
   }

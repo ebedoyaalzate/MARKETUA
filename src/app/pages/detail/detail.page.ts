@@ -28,7 +28,7 @@ export class DetailPage implements OnInit {
 
   findProduct() {
     this.idProduct = this.route.snapshot.paramMap.get('id');
-    this.productService.productDetail(this.idProduct).subscribe(res => {
+    this.productService.productDetailRuby(this.idProduct).subscribe(res => {
       this.product = res;
     });
   }

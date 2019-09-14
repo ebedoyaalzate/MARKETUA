@@ -8,13 +8,35 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  findProducts(searchText: string) {
-     return this.http.get<any>(`https://my-json-server.typicode.com/ebedoyaalzate/fakeProducts/db`, {}); // Api mock
-     // return this.http.get<any>(`http://marketua-develop-api.herokuapp.com/search?q=${searchText}`, {}); // Api Ruby
+  findProductsMock(searchText: string) {
+    return this.http.get<any>(`https://my-json-server.typicode.com/ebedoyaalzate/fakeProducts/db`, {}); // Api mock
+ }
+
+ productDetailMock(id) {
+   return this.http.get<any>(`https://my-json-server.typicode.com/ebedoyaalzate/fakeProducts/products/${id}`, {}); // Api mock
+ }
+
+  findProductsRuby(searchText: string) {
+    return this.http.get<any>(`http://marketua-develop-api.herokuapp.com/search?q=${searchText}`, {}); // Api Ruby
   }
 
-  productDetail(id) {
-    return this.http.get<any>(`https://my-json-server.typicode.com/ebedoyaalzate/fakeProducts/products/${id}`, {}); // Api mock
-    // return this.http.get<any>(`http://marketua-develop-api.herokuapp.com/items/${id}`, {}); // Api Ruby
+  productDetailRuby(id) {
+    return this.http.get<any>(`http://marketua-develop-api.herokuapp.com/items/${id}`, {}); // Api Ruby
+  }
+
+  findProductsFlask(searchText: string) {
+    return this.http.get<any>(`https://marketuaflask.herokuapp.com/search?q=${searchText}`, {}); // Api Ruby
+  }
+
+  productDetailFlask(id) {
+    return this.http.get<any>(`https://marketuaflask.herokuapp.com/items/${id}`, {}); // Api Ruby
+  }
+
+  findProductsGo(searchText: string) {
+    return this.http.get<any>(`http://marketua-go-api.herokuapp.com/search?q=${searchText}`, {}); // Api Ruby
+  }
+
+  productDetailGo(id) {
+    return this.http.get<any>(`http://marketua-go-api.herokuapp.com/items/${id}`, {}); // Api Ruby
   }
 }

@@ -16,11 +16,20 @@ export class HomePage implements OnInit {
   constructor(
     private productService: ProductService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   findProduct() {
-    this.productService.findProducts(this.searchText).subscribe(res => {
-      this.products = res.products;
+    this.products = [];
+    this.productService.findProductsRuby(this.searchText).subscribe(res => {
+      this.products = this.products.concat(res.products);
     });
+    /*
+    this.productService.findProductsFlask(this.searchText).subscribe(res => {
+      this.products = this.products.concat(res.products);
+    });
+    this.productService.findProductsGo(this.searchText).subscribe(res => {
+      this.products = this.products.concat(res.products);
+    });*/
   }
 }
