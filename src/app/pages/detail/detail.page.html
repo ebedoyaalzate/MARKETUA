@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content color="light" fullscreen>
   <ion-card *ngIf ="product">
-    <ion-img [src]="product.images[0].URL"></ion-img>
+    <ion-img [src]="product.thumbnail"></ion-img>
     <ion-card-header>
       <ion-card-subtitle class="price">{{product.price | currency}}</ion-card-subtitle>
       <ion-card-title class="title">{{product.name}}</ion-card-title>
