@@ -18,13 +18,14 @@ export class CarPage implements OnInit {
 
   ngOnInit() {
     this.getCar();
-    this.carService.changes.subscribe(id => {
-      this.productos = this.productos.filter(prod => prod.id !== id);
+    this.carService.changes.subscribe(product => {
+      this.productos = this.productos.filter(prod => prod.id !== product.id && prod.prov !== product.prov);
     });
   }
 
   getCar() {
     this.carService.getCar().then(prod => {
+      console.log(prod);
       this.productos = prod;
     });
   }

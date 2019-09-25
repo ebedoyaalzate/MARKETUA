@@ -42,7 +42,7 @@ export class CarService {
       const auxCar = val.filter(prod => prod.id != id && prod.prov !== prov);
       this.storage.set('car', auxCar);
     });
-    this.subject.next(id);
+    this.subject.next({id, prov});
   }
 
   getCar() {
