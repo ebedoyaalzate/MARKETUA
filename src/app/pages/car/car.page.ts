@@ -25,7 +25,6 @@ export class CarPage implements OnInit {
 
   getCar() {
     this.carService.getCar().then(prod => {
-      console.log(prod);
       this.productos = prod;
     });
   }
