@@ -12,6 +12,9 @@ export class HomePage implements OnInit {
 
   searchText = '';
   products: ProductDetail[];
+  productsRuby: ProductDetail[];
+  productsGo: ProductDetail[];
+  productsFlask: ProductDetail[];
 
   constructor(
     private productService: ProductService) {}
@@ -23,13 +26,15 @@ export class HomePage implements OnInit {
     this.products = [];
     this.productService.findProductsRuby(this.searchText).subscribe(res => {
       this.products = this.products.concat(res.products);
-    });
-    /*
-    this.productService.findProductsFlask(this.searchText).subscribe(res => {
-      this.products = this.products.concat(res.products);
+      this.productsRuby = res.products;
     });
     this.productService.findProductsGo(this.searchText).subscribe(res => {
       this.products = this.products.concat(res.products);
-    });*/
+      this.productsGo = res.products;
+    });
+    this.productService.findProductsFlask(this.searchText).subscribe(res => {
+      this.products = this.products.concat(res.products);
+      this.productsFlask = res.products;
+    });
   }
 }

@@ -14,7 +14,7 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
         <div class="products" *ngIf="productos">
-          <app-car-product *ngFor="let prod of productos" [id]="prod.id"></app-car-product>
+          <app-car-product *ngFor="let prod of productos" [prod]="prod"></app-car-product>
         </div>
       </ion-col>
     </ion-row>

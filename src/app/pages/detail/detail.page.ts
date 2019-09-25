@@ -13,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class DetailPage implements OnInit {
 
   idProduct: string;
+  provider: string;
   product: ProductDetail;
 
   constructor(
@@ -28,13 +29,14 @@ export class DetailPage implements OnInit {
 
   findProduct() {
     this.idProduct = this.route.snapshot.paramMap.get('id');
-    this.productService.productDetailRuby(this.idProduct).subscribe(res => {
+    this.provider = this.route.snapshot.paramMap.get('prov');
+    this.productService.productDetail(this.idProduct, this.provider).subscribe(res => {
       this.product = res;
     });
   }
 
   addToCar() {
-    this.carService.addToCar(this.idProduct);
+    this.carService.addToCar(this.idProduct, this.provider);
     this.presentAlert();
   }
 

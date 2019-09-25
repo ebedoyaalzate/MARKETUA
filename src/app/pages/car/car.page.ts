@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import { ProductDetail } from '../../models/productDetail';
 import { CarService } from '../../services/car/car.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -15,7 +14,6 @@ export class CarPage implements OnInit {
 
   constructor(
     private carService: CarService,
-    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
