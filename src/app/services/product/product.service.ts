@@ -39,4 +39,14 @@ export class ProductService {
   productDetailGo(id) {
     return this.http.get<any>(`http://marketua-go-api.herokuapp.com/items/${id}`, {}); // Api Ruby
   }
+
+  productDetail(id, prov) {
+    if (prov === 'ruby') {
+      return this.productDetailRuby(id);
+    } else if (prov === 'go') {
+      return this.productDetailGo(id);
+    } else if (prov === 'flask') {
+      return this.productDetailFlask(id);
+    }
+  }
 }

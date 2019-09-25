@@ -12,8 +12,9 @@ import { AlertController } from '@ionic/angular';
 export class CardDetailComponent implements OnInit {
 
   @Input() product: ProductDetail;
+  @Input() provider: string;
 
-  constructor( 
+  constructor(
     private router: Router,
     private carService: CarService,
     private alertController: AlertController
@@ -21,14 +22,14 @@ export class CardDetailComponent implements OnInit {
 
   presentDetail() {
     const id = this.product.id;
-    this.router.navigate(['/detail', id]);
+    this.router.navigate(['/detail', this.provider, id]);
   }
 
   ngOnInit() {
   }
 
   addCar() {
-    this.carService.addToCar(this.product.id);
+    this.carService.addToCar(this.product.id, this.provider);
     this.presentAlert();
   }
 

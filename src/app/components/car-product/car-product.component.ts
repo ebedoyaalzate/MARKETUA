@@ -12,7 +12,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class CarProductComponent implements OnInit {
 
-  @Input() id: string;
+  @Input() prod: any;
   product: ProductDetail;
   units: number;
 
@@ -25,12 +25,12 @@ export class CarProductComponent implements OnInit {
   ngOnInit() {
     this.carService.getCar().then(car => {
       car.forEach(prod => {
-        if (prod.id === this.id){
+        if (prod.id === this.prod.id && prod.prov === this.prod.prov) {
           this.units = prod.units;
         }
       });
     });
-    this.productService.productDetailRuby(this.id).subscribe(prod => {
+    this.productService.productDetail(this.prod.id, this.prod.prov).subscribe(prod => {
       this.product = prod;
     });
   }
@@ -38,13 +38,13 @@ export class CarProductComponent implements OnInit {
   restUnits() {
     if (this.units !== 1) {
       this.units --;
-      this.carService.changeUnit(this.id, this.units);
+      this.carService.changeUnit(this.prod.id, this.prod.prov, this.units);
     }
   }
 
   addUnits() {
     this.units ++;
-    this.carService.changeUnit(this.id, this.units);
+    this.carService.changeUnit(this.prod.id, this.prod.prov, this.units);
   }
 
   deleteProduct() {
@@ -64,7 +64,7 @@ export class CarProductComponent implements OnInit {
           text: 'OK',
           cssClass: 'primary',
           handler: () => {
-            this.carService.deleteProduct(this.id);
+            this.carService.deleteProduct(this.prod.id, this.prod.prov);
           }
         }
       ]

@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import { ProductDetail } from '../../models/productDetail';
 import { CarService } from '../../services/car/car.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -15,13 +14,12 @@ export class CarPage implements OnInit {
 
   constructor(
     private carService: CarService,
-    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.getCar();
-    this.carService.changes.subscribe(id => {
-      this.productos = this.productos.filter(prod => prod.id !== id);
+    this.carService.changes.subscribe(product => {
+      this.productos = this.productos.filter(prod => prod.id !== product.id && prod.prov !== product.prov);
     });
   }
 
