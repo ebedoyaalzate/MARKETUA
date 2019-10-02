@@ -2,3 +2,4 @@
 
 - npm i
 - Ionic serve
+- Prueba
