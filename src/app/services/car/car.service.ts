@@ -19,9 +19,11 @@ export class CarService {
       prov
     };
     this.storage.get('car').then((car) => {
+      console.log(car);
       car = car ? car : [];
-      car = car.filter(prod => prod.id != id && prod.prov !== prov);
+      car = car.filter(prod => prod.id != id || prod.prov !== prov);
       car.push(prod);
+      console.log(car);
       this.storage.set('car', car);
     });
   }
@@ -39,7 +41,7 @@ export class CarService {
 
   deleteProduct(id: string, prov: string) {
     this.storage.get('car').then((val) => {
-      const auxCar = val.filter(prod => prod.id != id && prod.prov !== prov);
+      const auxCar = val.filter(prod => prod.id != id || prod.prov !== prov);
       this.storage.set('car', auxCar);
     });
     this.subject.next({id, prov});
