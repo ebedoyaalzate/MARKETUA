@@ -1,6 +1,8 @@
 import { ProductDetail } from './../../models/productDetail';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product/product.service';
+import { MenuController } from '@ionic/angular';
+
 
 import { PopoverController } from '@ionic/angular';
 import { PopoverCategoriesComponent } from 'src/app/components/popover-categories/popover-categories.component';
@@ -24,7 +26,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private productService: ProductService,
-    public popoverController: PopoverController) {}
+    public popoverController: PopoverController,
+    private menu: MenuController) {}
 
   ngOnInit() {
   }
@@ -82,19 +85,16 @@ export class HomePage implements OnInit {
     this.productsFlask = this.productsGo = this.productsRuby = []
 
     this.productService.findProductsByCategoryRuby(this.category).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsRuby = res.products
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsRuby = res.products;
     });
     this.productService.findProductsByCategoryFlask(this.category).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsFlask = res.products
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsFlask = res.products;
     });
     this.productService.findProductsByCategoryGo(this.category).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsGo = res.products
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsGo = res.products;
     });
   }
 
@@ -103,19 +103,21 @@ export class HomePage implements OnInit {
     this.productsFlask = this.productsGo = this.productsRuby = []
 
     this.productService.findProductsByBrandRuby(this.brand).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsRuby = res.products
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsRuby = res.products;
     });
     this.productService.findProductsByBrandFlask(this.brand).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsFlask = res.brands
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsFlask = res.brands;
     });
     this.productService.findProductsByBrandGo(this.brand).subscribe(res => {
-      this.products.concat(res.products)
-      this.productsGo = res.products
-      console.log(res.products);
+      this.products.concat(res.products);
+      this.productsGo = res.products;
     });
+  }
+
+  openMenu() {
+    this.menu.enable(true, 'menu');
+    this.menu.open('menu');
   }
 }
