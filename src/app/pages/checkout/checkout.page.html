@@ -3,53 +3,57 @@
     <ion-title>checkout</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding class="checkout" style="background-color: #f4f4f4;">
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-input></ion-input>
-      </ion-item>
-      <!--<ion-item>
-        Credit / Debit / ATM Card
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
-
-      <ion-item>
-        Net Banking
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
-
-      <ion-item>
-        Cash on Delivery
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
-
-      <ion-item>
-        EMI (Easy Installments)
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>-->
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <p>PRICE DETAILS</p>
-      </ion-item>
-      <!-- <ion-row class="detail-row">
-				<p>PRICE DETAILS</p>
-			</ion-row>
-			<ion-row>
-				<ion-col width-70>
-				  <p>Price(1 item)</p>
-				  <p>Delievery</p>
-				</ion-col>
-				<ion-col width-30>
-				    <p style="text-align: right;">{{ 499 | currency:'INR'}}</p>
-				    <p style="text-align: right;color: #388e3c;">Free</p>
-				</ion-col>
-			</ion-row> -->
-    </ion-card-content>
-  </ion-card>
+  <form #form="ngForm" (ngSubmit)="register(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Billing Address</h3>
+          </div>
+          <div padding>
+            <ion-row size-md="12" size-lg="12" size-xs="12">
+              <ion-col size-md="6" size-lg="5" size-xs="6">
+                <ion-item>
+                  <ion-input name="firtName" type="text" placeholder="First Name" ngModel required></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size-md="6" size-lg="5" size-xs="6">
+                <ion-item>
+                  <ion-input name="lastName" type="text" placeholder="Last Name" ngModel required></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row size-md="12" size-lg="12" size-xs="12">
+              <ion-col size-md="6" size-lg="5" size-xs="6">
+                <ion-item>
+                  <ion-input name="email" type="email" placeholder="Email" ngModel required></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size-md="6" size-lg="5" size-xs="6">
+                <ion-item>
+                  <ion-input name="phone" type="number" placeholder="Telephone" ngModel required></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-item>
+              <ion-input name="address" type="text" placeholder="Address" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="country" type="text" placeholder="Country" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="city" type="text" placeholder="City" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="postalCode" type="text" placeholder="Zip/Postal Code" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

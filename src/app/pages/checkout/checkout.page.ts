@@ -7,15 +7,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   styleUrls: ["./checkout.page.scss"]
 })
 export class CheckoutPage implements OnInit {
-  myForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.myForm = this.fb.group({
-      email: "",
-      message: ""
-    });
-
-    this.myForm.valueChanges.subscribe(console.log);
-  }
+  ngOnInit() {}
 }
