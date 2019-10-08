@@ -7,6 +7,8 @@ const routes: Routes = [
   { path: 'detail/:prov/:id', loadChildren: './pages/detail/detail.module#DetailPageModule' },
   { path: 'car', loadChildren: './pages/car/car.module#CarPageModule' },
   { path: 'my-orders', loadChildren: './pages/my-orders/my-orders.module#MyOrdersPageModule' },
+  { path: 'checkout', loadChildren: './pages/checkout/checkout.module#CheckoutPageModule' },
+
 ];
 
 @NgModule({
