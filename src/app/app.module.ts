@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 
@@ -29,7 +30,7 @@ import { GooglePlus } from "@ionic-native/google-plus/ngx";
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireModule,
+    AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule
   ],

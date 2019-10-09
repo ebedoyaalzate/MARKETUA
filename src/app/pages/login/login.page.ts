@@ -12,13 +12,14 @@ import { Platform } from "@ionic/angular";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  //user: Observable<firebase.User>
+  user: Observable<firebase.User>
 
   constructor(
     private afAuth: AngularFireAuth,
     private gPlus: GooglePlus,
     private platform: Platform) {
-
+    
+      this.user = this.afAuth.user;
    }
 
   ngOnInit() {
