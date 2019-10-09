@@ -43,52 +43,52 @@
             <ion-item>
               <ion-input name="address" type="text" placeholder="Address" ngModel required></ion-input>
             </ion-item>
-            <ion-col size-md="12" size-lg="12" size-xs="12">
-              <ion-item>
+            <ion-row align-items-center size-md="12" size-lg="12" size-xs="12">
+              <ion-col size-md="6" size-lg="6" size-xs="6">
+                <!-- <ion-list>
+                <ion-label padding>Countries</ion-label>
+                <select (change)="obtenerCiudad()" [(ngModel)]="departamentoCapturado"
+                  [ngModelOptions]="{standalone: true}" required>
+                  <option *ngFor="let item of ciudades" value="{{item | json}}">{{item.departamento}}</option>
+                </select>
+              </ion-list> -->
                 <ion-list>
-                  <ion-item>
-                    <!-- <ion-select [(ngModel)]="ciudadCapturada" name="selectCode" multiple="false" (ionChange)="alex()"
-                      placeholder="Departamento" [ngModelOptions]="{standalone: true}">
-                      <ion-select-option *ngFor="let item of ciudades" value="{{item}}">{{item.departamento}}
-                      </ion-select-option>
-                    </ion-select> -->
-                    <label for="customSelect" padding>Countries</label>
-                    <select (change)="obtenerCiudad()" [(ngModel)]="departamentoCapturado"
-                      [ngModelOptions]="{standalone: true}" placeholder="Departamento">
-                      <option selected value="false" selected>Selecciona una ciudad ...</option>
-
-                      <option *ngFor="let item of ciudades" value="{{item | json}}">{{item.departamento}}</option>
-                    </select>
-
-                  </ion-item>
+                  <ion-label padding>Countries</ion-label>
+                  <ion-select (ionChange)="obtenerCiudad($event)" [(ngModel)]="departamentoCapturado"
+                    [ngModelOptions]="{standalone: true}" required>
+                    <ion-select-option *ngFor="let item of ciudades" value="{{item | json}}">{{item.departamento}}
+                    </ion-select-option>
+                  </ion-select>
                 </ion-list>
-              </ion-item>
-            </ion-col>
-            <ion-col size-md="12" size-lg="12" size-xs="12">
-              <ion-item>
-                <ion-list>
-                  <ion-item>
+              </ion-col>
+              <ion-col size-md="6" size-lg="6" size-xs="6">
+                <!-- <ion-list>
                     <label for="customSelect" padding>City</label>
                     <select (change)="obtenerCiudadDepartamento()" [(ngModel)]="ciudadesDepartamentoCapturado"
-                      [ngModelOptions]="{standalone: true}">
-
+                      [ngModelOptions]="{standalone: true}" required>
                       <option *ngFor="let item of ciudadesDepartamento.ciudades" value="{{item | json}}">
                         {{item}}</option>
                     </select>
-                  </ion-item>
+                  </ion-list> -->
+
+                <ion-list>
+                  <ion-label padding>City</ion-label>
+                  <ion-select (ionChange)="obtenerCiudadDepartamento($event)"
+                    [(ngModel)]="ciudadesDepartamentoCapturado" [ngModelOptions]="{standalone: true}" required>
+                    <ion-select-option *ngFor="let item of ciudadesDepartamento.ciudades" value="{{item | json}}">
+                      {{item}}
+                    </ion-select-option>
+                  </ion-select>
                 </ion-list>
-              </ion-item>
-            </ion-col>
-            <ion-item>
-              <ion-input name="city" type="text" placeholder="City" ngModel required></ion-input>
-            </ion-item>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-input name="postalCode" type="number" placeholder="Zip/Postal Code" ngModel required></ion-input>
             </ion-item>
           </div>
           <div padding>
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block"
-              [routerLink]="['/review-order']">Register</ion-button>
+              [routerLink]="['/review-order']">Registrar</ion-button>
           </div>
         </ion-col>
       </ion-row>

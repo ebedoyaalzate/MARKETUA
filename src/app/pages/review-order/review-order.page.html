@@ -18,12 +18,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-label padding>Metodo de pago</ion-label>
+  <ion-label padding>Tipo Envio</ion-label>
   <ion-card>
     <ion-card-content>
       <ion-item>
-        <ion-icon name="cash" padding></ion-icon>
-        <h5>Tarjeta/contraEntrega/efecty</h5>
+        <ion-icon name="bus" padding></ion-icon>
+        <ion-list>
+          <ion-radio-group>
+            <ion-item>
+              <ion-label>Normal</ion-label>
+              <ion-radio slot="start" value="normal" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Rapido</ion-label>
+              <ion-radio slot="start" value="rapido"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -37,5 +48,12 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+
+  <ion-row>
+    <ion-col class="centrar">
+      <a href="https://biz.payulatam.com/B0c9d60754A1DC1"><img
+          src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a>
+    </ion-col>
+  </ion-row>
 
 </ion-content>
