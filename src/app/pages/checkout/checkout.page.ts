@@ -14,7 +14,7 @@ export class CheckoutPage implements OnInit {
 
   public departamentoCapturado: any = new Array();
   public ciudades: any = new Array();
-  public ciudadesDepartamentoCapturado: string;
+  public ciudadesDepartamentoCapturado: any = Array();
   public ciudadesDepartamento: any = Array();
   public direccionFormulario: string;
 
@@ -24,17 +24,17 @@ export class CheckoutPage implements OnInit {
     });
   }
 
-  /*pasarParametros() {
-    this.navCtrl.push()
-  }*/
-
   obtenerCiudad() {
     this.ciudadesDepartamento = JSON.parse(this.departamentoCapturado);
 
     //alert('la ciudad es: ' + JSON.stringify(this.ciudadCapturada));
+    console.log('la ciudad es: ' + JSON.stringify(this.ciudadesDepartamento.departamento));
   }
 
   routingReview() {
+    debugger;
+    this.direccionFormulario = this.direccionFormulario + ', '
+      + this.ciudadesDepartamentoCapturado.replace(/['"]+/g, '') + '/' + this.ciudadesDepartamento.departamento;
     this.router.navigate(['/review-order', this.direccionFormulario]);
   }
 
