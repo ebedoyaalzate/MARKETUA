@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -33,4 +32,4 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

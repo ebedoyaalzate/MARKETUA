@@ -8,7 +8,9 @@ import { CountryService } from 'src/app/services/country/country.service';
   styleUrls: ['./checkout.page.scss']
 })
 export class CheckoutPage implements OnInit {
+
   constructor(private countryApi: CountryService) { }
+
   public departamentoCapturado: any = new Array();
   public ciudades: any = new Array();
   public ciudadesDepartamentoCapturado: any = Array();
@@ -19,6 +21,10 @@ export class CheckoutPage implements OnInit {
       this.ciudades = response;
     });
   }
+
+  /*pasarParametros() {
+    this.navCtrl.push()
+  }*/
 
   obtenerCiudad() {
     this.ciudadesDepartamento = JSON.parse(this.departamentoCapturado);
