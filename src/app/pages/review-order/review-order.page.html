@@ -50,8 +50,25 @@
   </ion-card>
 
   <ion-row>
-    <ion-col class="centrar"><a href="https://biz.payulatam.com/B0c9d60754A1DC1"><img
-          src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a>
+    <ion-col class="centrar">
+      <form id="payu" method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+        <input name="merchantId" type="hidden" value="{{merchant}}">
+        <input name="accountId" type="hidden" value="512321">
+        <input name="description" type="hidden" value="Ventas Marketua">
+        <input name="referenceCode" type="hidden" value="{{codigoReferencia}}">
+        <input name="amount" type="hidden" value="{{pagoCompleto}}">
+        <input name="tax" type="hidden" value="0">
+        <input name="taxReturnBase" type="hidden" value="0">
+        <input name="currency" type="hidden" value="{{tipoMoneda}}">
+        <input name="signature" type="hidden" value="{{signatureMD5}}">
+        <input name="test" type="hidden" value="1">
+        <input name="buyerEmail" type="hidden" value="test@test.com">
+        <input name="responseUrl" type="hidden" value="http://www.test.com/response">
+        <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
+        <ion-button (click)="pagarPayu()" size="large" expand="block">
+          <ion-icon ios="ios-cash" md="md-cash" padding></ion-icon>Pagar
+        </ion-button>
+      </form>
     </ion-col>
   </ion-row>
 

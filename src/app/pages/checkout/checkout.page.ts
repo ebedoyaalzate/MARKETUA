@@ -32,7 +32,6 @@ export class CheckoutPage implements OnInit {
   }
 
   routingReview() {
-    debugger;
     this.direccionFormulario = this.direccionFormulario + ', '
       + this.ciudadesDepartamentoCapturado.replace(/['"]+/g, '') + '/' + this.ciudadesDepartamento.departamento;
     this.router.navigate(['/review-order', this.direccionFormulario]);
