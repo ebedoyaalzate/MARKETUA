@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CountryService } from 'src/app/services/country/country.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -9,12 +10,13 @@ import { CountryService } from 'src/app/services/country/country.service';
 })
 export class CheckoutPage implements OnInit {
 
-  constructor(private countryApi: CountryService) { }
+  constructor(private countryApi: CountryService, private router: Router) { }
 
   public departamentoCapturado: any = new Array();
   public ciudades: any = new Array();
-  public ciudadesDepartamentoCapturado: any = Array();
+  public ciudadesDepartamentoCapturado: string;
   public ciudadesDepartamento: any = Array();
+  public direccionFormulario: string;
 
   ngOnInit() {
     this.countryApi.findCountries().subscribe(response => {
@@ -32,7 +34,11 @@ export class CheckoutPage implements OnInit {
     //alert('la ciudad es: ' + JSON.stringify(this.ciudadCapturada));
   }
 
-  obtenerCiudadDepartamento() {
-    alert('la ciudad es: ' + this.ciudadesDepartamentoCapturado);
+  routingReview() {
+    this.router.navigate(['/review-order', this.direccionFormulario]);
   }
+
+  /*obtenerCiudadDepartamento() {
+    alert('la ciudad es: ' + this.ciudadesDepartamentoCapturado);
+  }*/
 }

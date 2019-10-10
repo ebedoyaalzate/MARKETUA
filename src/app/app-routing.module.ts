@@ -8,8 +8,7 @@ const routes: Routes = [
   { path: 'car', loadChildren: './pages/car/car.module#CarPageModule' },
   { path: 'my-orders', loadChildren: './pages/my-orders/my-orders.module#MyOrdersPageModule' },
   { path: 'checkout', loadChildren: './pages/checkout/checkout.module#CheckoutPageModule' },
-  { path: 'review-order', loadChildren: './pages/review-order/review-order.module#ReviewOrderPageModule' },
-
+  { path: 'review-order/:direccion', loadChildren: './pages/review-order/review-order.module#ReviewOrderPageModule' },
 
 ];
 

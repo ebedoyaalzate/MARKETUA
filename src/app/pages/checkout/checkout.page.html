@@ -16,18 +16,9 @@
             <h3>Billing Address</h3>
           </div>
           <div padding>
-            <ion-row size-md="12" size-lg="12" size-xs="12">
-              <ion-col size-md="6" size-lg="5" size-xs="6">
-                <ion-item>
-                  <ion-input name="firtName" type="text" placeholder="First Name" ngModel required></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size-md="6" size-lg="5" size-xs="6">
-                <ion-item>
-                  <ion-input name="lastName" type="text" placeholder="Last Name" ngModel required></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+            <ion-item>
+              <ion-input name="name" type="text" placeholder="Name" ngModel required></ion-input>
+            </ion-item>
             <ion-row size-md="12" size-lg="12" size-xs="12">
               <ion-col size-md="6" size-lg="5" size-xs="6">
                 <ion-item>
@@ -41,17 +32,11 @@
               </ion-col>
             </ion-row>
             <ion-item>
-              <ion-input name="address" type="text" placeholder="Address" ngModel required></ion-input>
+              <ion-input name="address" type="text" placeholder="Address" [(ngModel)]="direccionFormulario" required>
+              </ion-input>
             </ion-item>
             <ion-row align-items-center size-md="12" size-lg="12" size-xs="12">
               <ion-col size-md="6" size-lg="6" size-xs="6">
-                <!-- <ion-list>
-                <ion-label padding>Countries</ion-label>
-                <select (change)="obtenerCiudad()" [(ngModel)]="departamentoCapturado"
-                  [ngModelOptions]="{standalone: true}" required>
-                  <option *ngFor="let item of ciudades" value="{{item | json}}">{{item.departamento}}</option>
-                </select>
-              </ion-list> -->
                 <ion-list>
                   <ion-label padding>Countries</ion-label>
                   <ion-select (ionChange)="obtenerCiudad($event)" [(ngModel)]="departamentoCapturado"
@@ -62,19 +47,10 @@
                 </ion-list>
               </ion-col>
               <ion-col size-md="6" size-lg="6" size-xs="6">
-                <!-- <ion-list>
-                    <label for="customSelect" padding>City</label>
-                    <select (change)="obtenerCiudadDepartamento()" [(ngModel)]="ciudadesDepartamentoCapturado"
-                      [ngModelOptions]="{standalone: true}" required>
-                      <option *ngFor="let item of ciudadesDepartamento.ciudades" value="{{item | json}}">
-                        {{item}}</option>
-                    </select>
-                  </ion-list> -->
-
                 <ion-list>
                   <ion-label padding>City</ion-label>
-                  <ion-select (ionChange)="obtenerCiudadDepartamento($event)"
-                    [(ngModel)]="ciudadesDepartamentoCapturado" [ngModelOptions]="{standalone: true}" required>
+                  <ion-select [(ngModel)]="ciudadesDepartamentoCapturado" [ngModelOptions]="{standalone: true}"
+                    required>
                     <ion-select-option *ngFor="let item of ciudadesDepartamento.ciudades" value="{{item | json}}">
                       {{item}}
                     </ion-select-option>
@@ -82,13 +58,10 @@
                 </ion-list>
               </ion-col>
             </ion-row>
-            <ion-item>
-              <ion-input name="postalCode" type="number" placeholder="Zip/Postal Code" ngModel required></ion-input>
-            </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block"
-              [routerLink]="['/review-order']">Registrar</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="routingReview()">
+              Registrar</ion-button>
           </div>
         </ion-col>
       </ion-row>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-review-order',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewOrderPage implements OnInit {
 
-  constructor() { }
-
+  direccionRecibida: string;
+  constructor(private activateRoute: ActivatedRoute) { }
   ngOnInit() {
+    this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
+    //alert('la direccion fue ' + this.direccionRecibida);
   }
 
 }
