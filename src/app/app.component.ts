@@ -31,4 +31,10 @@ export class AppComponent {
     this.menu.enable(true, 'menu');
     this.menu.close('menu');
   }
+
+  logout() {
+    this.authService.logout();
+    this.menu.enable(true, 'menu');
+    this.menu.close('menu');
+  }
 }
