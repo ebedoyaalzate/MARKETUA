@@ -33,7 +33,7 @@ export class ReviewOrderPage implements OnInit {
   pagarPayu() {
     this.signatureMD5 = Md5.init(this.apiKeyPrueba + '~' + this.merchant + '~'
       + this.codigoReferencia + '~' + this.pagoCompleto + '~' + this.tipoMoneda);
-    //document.getElementById('payu').submit();
+    document.getElementById('payu')["submit"]();
   }
 
 }
