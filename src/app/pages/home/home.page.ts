@@ -34,7 +34,6 @@ export class HomePage implements OnInit {
     public afAuth: AngularFireAuth) {
 
       this.userDetail = this.authService.userDetails;
-     
     }
 
   ngOnInit() {

@@ -18,8 +18,7 @@ export class AuthService {
     private gPlus: GooglePlus,
     private platform: Platform,
     public router: Router) {
-      this.user = this.afAuth.authState;
-      console.log("user state", this.user);
+      this.user = this.afAuth.authState
 
       this.user.subscribe(
         (user) => {
@@ -33,10 +32,14 @@ export class AuthService {
         }
       );
      }
+
   
      googleLogin() {
       if(this.platform.is('cordova')) {
-        this.nativeGoogleLogin();
+        this.nativeGoogleLogin().then(user => {
+          this.router.navigate(['/home']);
+        })
+        .catch((err)=> console.log(err));;
       } else {
         this.webGoogleLogin().then(user => {
           this.router.navigate(['/home']);
@@ -45,14 +48,14 @@ export class AuthService {
       }
     }
   
-    async nativeGoogleLogin(): Promise<void> {
+    async nativeGoogleLogin(){
       try {
         const gPlusUser = await this.gPlus.login({
           'webClientId': '1094856102481-phn3qb7424npnk56prhujpko4b0tp19i.apps.googleusercontent.com',
           'offline': true,
           'scopes': 'profile email'
         });
-        await this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(gPlusUser.idToken))
+        return await this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(gPlusUser.idToken));
       }
       catch(err) {
         console.log(err);
@@ -70,11 +73,7 @@ export class AuthService {
     }
 
     isLoggedIn() {
-      if (this.userDetails == null ) {
-          return false;
-        } else {
-          return true;
-        }
+      // TODO
       }
 
     logout() {
