@@ -10,7 +10,15 @@ import { Router } from '@angular/router';
 })
 export class CheckoutPage implements OnInit {
 
-  constructor(private countryApi: CountryService, private router: Router) { }
+  checkoutForm: any = {
+    name: '',
+    email: '',
+    phone: ''
+  };
+
+  constructor(private countryApi: CountryService, private router: Router) {
+
+  }
 
   public departamentoCapturado: any = new Array();
   public ciudades: any = new Array();
@@ -24,14 +32,20 @@ export class CheckoutPage implements OnInit {
     });
   }
 
+  register(formPru) {
+    console.log("formu: " + formPru);
+  }
+
   obtenerCiudad() {
     this.ciudadesDepartamento = JSON.parse(this.departamentoCapturado);
 
     //alert('la ciudad es: ' + JSON.stringify(this.ciudadCapturada));
-    console.log('la ciudad es: ' + JSON.stringify(this.ciudadesDepartamento.departamento));
+    // console.log('la ciudad es: ' + JSON.stringify(this.ciudadesDepartamento.departamento));
   }
 
   routingReview() {
+    localStorage["checkoutLocal"] = JSON.stringify(this.checkoutForm);
+
     this.direccionFormulario = this.direccionFormulario + ', '
       + this.ciudadesDepartamentoCapturado.replace(/['"]+/g, '') + '/' + this.ciudadesDepartamento.departamento;
     this.router.navigate(['/review-order', this.direccionFormulario]);

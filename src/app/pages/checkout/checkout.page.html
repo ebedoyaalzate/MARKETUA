@@ -17,17 +17,20 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input name="name" type="text" placeholder="Name" ngModel required></ion-input>
+              <ion-input name="name" type="text" placeholder="Name" [(ngModel)]="checkoutForm.name" required>
+              </ion-input>
             </ion-item>
             <ion-row size-md="12" size-lg="12" size-xs="12">
               <ion-col size-md="6" size-lg="5" size-xs="6">
                 <ion-item>
-                  <ion-input name="email" type="email" placeholder="Email" ngModel required></ion-input>
+                  <ion-input name="email" type="email" placeholder="Email" [(ngModel)]="checkoutForm.email" required>
+                  </ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size-md="6" size-lg="5" size-xs="6">
                 <ion-item>
-                  <ion-input name="phone" type="number" placeholder="Telephone" ngModel required></ion-input>
+                  <ion-input name="phone" type="number" placeholder="Telephone" [(ngModel)]="checkoutForm.phone"
+                    required></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
