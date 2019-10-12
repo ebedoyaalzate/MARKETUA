@@ -17,6 +17,10 @@ export class ReviewOrderPage implements OnInit {
 
   checkoutModel = new Checkout();
 
+  item1: any;
+  item2: any;
+  itemArray: any;
+
   buyerEmail: String
   direccionRecibida: string;
   merchant: string = '508029';
@@ -39,6 +43,21 @@ export class ReviewOrderPage implements OnInit {
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
     this.nombrePersona = this.ordenCheckoutLocal.name;
     this.buyerEmail = this.ordenCheckoutLocal.email;
+
+    this.item1 = new Items();
+    this.item1.backend = 'GO';
+    this.item1.item_id = '1';
+    this.item1.quantity = '9000000';
+
+    this.item2 = new Items();
+    this.item2.backend = 'GO';
+    this.item2.item_id = '2';
+    this.item2.quantity = '2000000';
+
+    this.itemArray = new Array<Items>();
+    this.itemArray.push(this.item1);
+    this.itemArray.push(this.item2);
+
   }
 
   uuidv4() {
@@ -68,30 +87,27 @@ export class ReviewOrderPage implements OnInit {
   }
 
   comprarenGo() {
-    let item1 = new Items();
-    item1.backend = 'Portatil Macbook Pro';
-    item1.item_id = '1';
-    item1.quantity = '9000000';
 
-    let item2 = new Items();
-    item2.backend = 'Portatil Acer Aspire 5';
-    item2.item_id = '1';
-    item2.quantity = '2000000';
-
-    let itemArray = new Array<Items>();
-    itemArray.push(item1);
-    itemArray.push(item2);
 
     this.checkoutModel.username = this.ordenCheckoutLocal.name;
     this.checkoutModel.payment_method = 'Contraentrega';
     this.checkoutModel.shipment_address = this.direccionRecibida;
     this.checkoutModel.total = parseInt(this.pagoCompleto);
-    this.checkoutModel.items = itemArray;
+    this.checkoutModel.items = this.itemArray;
 
     this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
       compra => {
         console.log('Compra exitosa para Go' + JSON.stringify(compra));
         this.pagarPayu();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+    this.checkoutService.checkoutFlask(this.checkoutModel).subscribe(
+      compra => {
+        console.log('Compra exitosa para Flask' + JSON.stringify(compra));
       },
       err => {
         console.log(err);

@@ -33,7 +33,7 @@ export class CheckoutPage implements OnInit {
   }
 
   register(formPru) {
-    console.log("formu: " + formPru);
+    //console.log("formu: " + formPru);
   }
 
   obtenerCiudad() {
