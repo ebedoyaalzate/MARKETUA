@@ -18,7 +18,7 @@ export class CheckoutService {
     };
     debugger;
 
-    console.log(httpOptions.headers.get.name)
+    console.log(httpOptions.headers.get('idToken'));
     const compraJson = JSON.stringify(compra);
     console.log(compraJson);
     return this.http.post<Checkout>(`https://marketua-go-api.herokuapp.com/checkout`, compraJson, httpOptions);
