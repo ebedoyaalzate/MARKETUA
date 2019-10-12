@@ -69,7 +69,7 @@ export class ReviewOrderPage implements OnInit {
 
     this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
       compra => {
-        console.log('Compra exitosa para Go');
+        console.log('Compra exitosa para Go' + JSON.stringify(compra));
         this.pagarPayu();
       },
       err => {
