@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { PopoverCategoriesComponent } from 'src/app/components/popover-categories/popover-categories.component';
+import { PopoverBrandsComponent } from 'src/app/components/popover-brands/popover-brands.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,13 @@ import { HomePage } from './home.page';
   ],
   declarations: [
     HomePage,
-    CardDetailComponent
+    CardDetailComponent,
+    PopoverCategoriesComponent,
+    PopoverBrandsComponent
+  ],
+  entryComponents: [
+    PopoverCategoriesComponent,
+    PopoverBrandsComponent
   ]
 })
 export class HomePageModule {}

@@ -1,17 +1,23 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="openMenu()">
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
     <ion-title>
       MARKETUA
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-label *ngIf="userDetail">
+</ion-label>
 <ion-content color="light">
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
         <ion-input placeholder="Ingrese producto" class="input-item" [(ngModel)]="searchText"></ion-input>
         <ion-button color="primary" expand="block" type="submit" (click)="findProduct()">Buscar</ion-button>
+          <ion-button color="medium" size="small" (click)="presentPopoverCategories($event)">Categorias</ion-button>
+          <ion-button color="medium" size="small" (click)="presentPopoverBrands($event)">Marcas</ion-button>
         <div class="products" *ngIf="products">
           <app-card-detail *ngFor="let prod of productsRuby" [product]="prod" provider="ruby"></app-card-detail>
           <app-card-detail *ngFor="let prod of productsGo" [product]="prod" provider="go"></app-card-detail>

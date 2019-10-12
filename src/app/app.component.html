@@ -1,3 +1,17 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-menu side="start" content-id="menu" menuId="menu" content-id="principal">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Opciones</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+            <ion-item *ngIf="authService.userDetails">{{authService.userDetails.displayName}}</ion-item>
+          <ion-item [routerLink]="['/my-orders']" (click)="closeMenu()">Mis Pedidos</ion-item>
+          <ion-item (click)="logout()">Logout</ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+  <ion-router-outlet id="principal"></ion-router-outlet>
 </ion-app>
