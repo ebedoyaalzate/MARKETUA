@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Md5 } from "md5-typescript";
 import { Form, FormBuilder } from '@angular/forms';
@@ -6,6 +6,7 @@ import { CheckoutService } from 'src/app/services/checkout/checkout.service';
 import { Checkout } from 'src/app/models/checkout';
 import { CarService } from 'src/app/services/car/car.service';
 import { Items } from 'src/app/models/Items';
+import { ProductDetail } from 'src/app/models/productDetail';
 
 @Component({
   selector: 'app-review-order',
@@ -25,13 +26,18 @@ export class ReviewOrderPage implements OnInit {
   signatureMD5: string;
   apiKeyPrueba: string = '4Vj8eK4rloUd272L48hsrarnUA';
   nombrePersona: string;
-  productos: any
+
+  @Input() product: ProductDetail;
+  productos: any = Array();
 
   ordenCheckoutLocal: any;
 
   constructor(private activateRoute: ActivatedRoute, private checkoutService: CheckoutService, private carService: CarService) {
   }
   ngOnInit() {
+    this.carService.changes.subscribe(product => {
+      this.productos = this.productos.filter(prod => prod.id !== product.id && prod.prov !== product.prov);
+    });
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
     this.codigoReferencia = this.uuidv4();
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
@@ -46,12 +52,13 @@ export class ReviewOrderPage implements OnInit {
     });
   }
 
-  /*calcularValor() {
-    this.carService.getCar().then(prod => {
+  calcularValor() {
+    //console.log(this.productos);
+    /*this.carService.getCar().then(prod => {
       this.productos = prod;
     });
-    debugger;
-  }*/
+    console.log("soy prod:" + this.productos);*/
+  }
 
   pagarPayu() {
     this.signatureMD5 = Md5.init(this.apiKeyPrueba + '~' + this.merchant + '~'
@@ -64,7 +71,6 @@ export class ReviewOrderPage implements OnInit {
     item.backend = 'prueba';
     item.item_id = '1';
     item.quantity = '1';
-    debugger;
 
     let itemArray = new Array<Items>();
     itemArray.push(item);

@@ -13,14 +13,10 @@ export class CheckoutService {
   checkoutGo(compra: Checkout): Observable<Checkout> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'idToken': '123'
+        'Content-Type': 'idToken=123'
       })
     };
-    debugger;
-
-    console.log(httpOptions.headers.get('idToken'));
     const compraJson = JSON.stringify(compra);
-    console.log(compraJson);
     return this.http.post<Checkout>(`https://marketua-go-api.herokuapp.com/checkout`, compraJson, httpOptions);
   }
 }
