@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { UsersService } from './../../services/users/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
@@ -9,24 +10,26 @@ import { Order } from 'src/app/models/order';
 })
 export class MyOrdersPage implements OnInit {
 
+  userDetails: any
   order: any[];
   ordenCheckoutLocal: any;
   name: string;
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    let username = this.authService.userDetails.email.split('@')[0];
     this.order = []
-    this.usersService.getOrdersGo('edison').subscribe(res => {
-      this.order = this.order.concat(res.orders)
-      console.log(this.order);
-    });
-    this.usersService.getOrdersFlask('edison').subscribe(res => {
+    this.usersService.getOrdersGo(username).subscribe(res => {
       this.order = this.order.concat(res.orders)
     });
-    this.usersService.getOrdersRuby('edison').subscribe(res => {
+    this.usersService.getOrdersFlask(username).subscribe(res => {
+      this.order = this.order.concat(res.orders)
+    });
+    this.usersService.getOrdersRuby(username).subscribe(res => {
       this.order = this.order.concat(res.orders)
     });
   }

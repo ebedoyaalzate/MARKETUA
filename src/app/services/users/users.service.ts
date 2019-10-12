@@ -13,10 +13,10 @@ export class UsersService {
   }
 
   getOrdersRuby(username: string) {
-    return this.http.get<any>(`http://marketua-api.herokuapp.com/orders/Lucho`)
+    return this.http.get<any>(`http://marketua-api.herokuapp.com/orders/${username}`)
   }
 
   getOrdersFlask(username: string) {
-    return this.http.get<any>(`https://marketuaflask.herokuapp.com/orders/daniel`)
+    return this.http.get<any>(`https://marketuaflask.herokuapp.com/orders/${username}`)
   }
 }
