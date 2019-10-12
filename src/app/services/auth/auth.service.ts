@@ -12,12 +12,13 @@ import { Router } from '@angular/router';
 export class AuthService {
   public user: Observable<firebase.User>;
   public userDetails: any;
-
+  
   constructor(
     public afAuth: AngularFireAuth,
     private gPlus: GooglePlus,
     private platform: Platform,
-    public router: Router) {
+    public router: Router) 
+    {
       this.user = this.afAuth.authState
 
       this.user.subscribe(
@@ -36,14 +37,10 @@ export class AuthService {
   
      googleLogin() {
       if(this.platform.is('cordova')) {
-        this.nativeGoogleLogin().then(user => {
-          this.router.navigate(['/home']);
-        })
+        this.nativeGoogleLogin()
         .catch((err)=> console.log(err));;
       } else {
-        this.webGoogleLogin().then(user => {
-          this.router.navigate(['/home']);
-        })
+        this.webGoogleLogin()
         .catch((err)=> console.log(err));
       }
     }
@@ -55,11 +52,12 @@ export class AuthService {
           'offline': true,
           'scopes': 'profile email'
         });
-        return await this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(gPlusUser.idToken));
-      }
-      catch(err) {
-        console.log(err);
-        
+        return await this.afAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(gPlusUser.idToken))
+        .then(() =>{
+            this.router.navigate(["/home"]);
+          });
+      } catch(err) {
+        console.log(err); 
       }
     }
   
@@ -67,14 +65,17 @@ export class AuthService {
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
         return await this.afAuth.auth.signInWithPopup(provider)
+          .then(() =>{
+            this.router.navigate(["/home"]);
+          });
       } catch(err) {
         console.log(err)
       }
     }
 
-    isLoggedIn() {
-      // TODO
-      }
+    isLoggedIn(){
+      //TODO
+    }
 
     logout() {
         this.afAuth.auth.signOut()
