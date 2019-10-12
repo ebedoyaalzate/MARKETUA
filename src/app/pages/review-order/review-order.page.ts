@@ -5,7 +5,7 @@ import { Form, FormBuilder } from '@angular/forms';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
 import { Checkout } from 'src/app/models/checkout';
 import { CarService } from 'src/app/services/car/car.service';
-import { Items } from 'src/app/models/Items';
+import { Items } from 'src/app/models/items';
 import { ProductDetail } from 'src/app/models/productDetail';
 
 @Component({
