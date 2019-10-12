@@ -7,7 +7,8 @@ import { MenuController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverCategoriesComponent } from 'src/app/components/popover-categories/popover-categories.component';
 import { PopoverBrandsComponent } from 'src/app/components/popover-brands/popover-brands.component';
-
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -23,13 +24,21 @@ export class HomePage implements OnInit {
   productsRuby: ProductDetail[];
   productsGo: ProductDetail[];
   productsFlask: ProductDetail[];
+  userDetail: any;
 
   constructor(
     private productService: ProductService,
     public popoverController: PopoverController,
-    private menu: MenuController) {}
+    private menu: MenuController,
+    public authService: AuthService,
+    public afAuth: AngularFireAuth) {
+
+      this.userDetail = this.authService.userDetails;
+    }
 
   ngOnInit() {
+    this.userDetail = this.authService.userDetails;
+    
   }
 
   findProduct() {

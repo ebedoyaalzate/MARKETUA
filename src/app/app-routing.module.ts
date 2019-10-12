@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'my-orders', loadChildren: './pages/my-orders/my-orders.module#MyOrdersPageModule' },
   { path: 'checkout', loadChildren: './pages/checkout/checkout.module#CheckoutPageModule' },
   { path: 'review-order/:direccion', loadChildren: './pages/review-order/review-order.module#ReviewOrderPageModule' },
-
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) }
 ];
 
 @NgModule({

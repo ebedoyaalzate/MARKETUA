@@ -11,6 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 
 
 @NgModule({
@@ -22,10 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule
   ],
   providers: [
+    GooglePlus,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
