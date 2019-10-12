@@ -20,24 +20,20 @@ export class ReviewOrderPage implements OnInit {
   buyerEmail: String
   direccionRecibida: string;
   merchant: string = '508029';
-  pagoCompleto: string = '30000';
+  pagoCompleto: string = '11000000';
   tipoMoneda: string = 'COP';
   codigoReferencia: string;
   signatureMD5: string;
   apiKeyPrueba: string = '4Vj8eK4rloUd272L48hsrarnUA';
   nombrePersona: string;
 
-  @Input() product: ProductDetail;
-  productos: any = Array();
+  productos: ProductDetail[];
 
   ordenCheckoutLocal: any;
 
   constructor(private activateRoute: ActivatedRoute, private checkoutService: CheckoutService, private carService: CarService) {
   }
   ngOnInit() {
-    this.carService.changes.subscribe(product => {
-      this.productos = this.productos.filter(prod => prod.id !== product.id && prod.prov !== product.prov);
-    });
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
     this.codigoReferencia = this.uuidv4();
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
@@ -52,13 +48,18 @@ export class ReviewOrderPage implements OnInit {
     });
   }
 
-  calcularValor() {
+  /*calcularValor() {
+    debugger;
+    let property: any;
+
     //console.log(this.productos);
-    /*this.carService.getCar().then(prod => {
+    let cosita = this.carService.getCar().then(prod => {
       this.productos = prod;
     });
-    console.log("soy prod:" + this.productos);*/
-  }
+    console.log("soy prod:" + this.productos);
+
+    console.log("soy prod:" + cosita);
+  }*/
 
   pagarPayu() {
     this.signatureMD5 = Md5.init(this.apiKeyPrueba + '~' + this.merchant + '~'
@@ -67,13 +68,19 @@ export class ReviewOrderPage implements OnInit {
   }
 
   comprarenGo() {
-    let item = new Items();
-    item.backend = 'prueba';
-    item.item_id = '1';
-    item.quantity = '1';
+    let item1 = new Items();
+    item1.backend = 'Portatil Macbook Pro';
+    item1.item_id = '1';
+    item1.quantity = '9000000';
+
+    let item2 = new Items();
+    item2.backend = 'Portatil Acer Aspire 5';
+    item2.item_id = '1';
+    item2.quantity = '2000000';
 
     let itemArray = new Array<Items>();
-    itemArray.push(item);
+    itemArray.push(item1);
+    itemArray.push(item2);
 
     this.checkoutModel.username = this.ordenCheckoutLocal.name;
     this.checkoutModel.payment_method = 'Contraentrega';
