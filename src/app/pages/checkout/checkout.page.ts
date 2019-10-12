@@ -33,10 +33,10 @@ export class CheckoutPage implements OnInit {
   }
 
   register(formPru) {
-    //console.log("formu: " + formPru);
+    console.log("formu: " + formPru);
   }
 
-  obtenerCiudad() {
+  obtenerCiudad(event) {
     this.ciudadesDepartamento = JSON.parse(this.departamentoCapturado);
 
     //alert('la ciudad es: ' + JSON.stringify(this.ciudadCapturada));
