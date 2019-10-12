@@ -1,6 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>myOrders</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Inicio"> </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,11 +15,11 @@
 
     </ion-card-header>
     <ion-card-content>
-        <p>Metod de pago: {{ord.payment_method}}</p>
-        <div *ngFor="let item of ord.items">
-          <ion-label>item: {{item.item_id}}     </ion-label>
-          <ion-label>Cantidad: {{item.quantity}}</ion-label>
-        </div>
+      <p>Metod de pago: {{ord.payment_method}}</p>
+      <div *ngFor="let item of ord.items">
+        <ion-label>item: {{item.item_id}} </ion-label>
+        <ion-label>Cantidad: {{item.quantity}}</ion-label>
+      </div>
     </ion-card-content>
   </ion-card>
 
