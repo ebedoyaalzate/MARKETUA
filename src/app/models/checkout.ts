@@ -1,4 +1,4 @@
-import { Items } from './Items';
+import { Items } from './items';
 
 export class Checkout {
     public items: Array<Items>;
