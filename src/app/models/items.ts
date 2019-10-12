@@ -1,4 +1,5 @@
 export class Items {
-    public Item_id: string;
-    public Quantity: string;
+    public item_id: string;
+    public quantity: string;
+    public backend: string;
 }
