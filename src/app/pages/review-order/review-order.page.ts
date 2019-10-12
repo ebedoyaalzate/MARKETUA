@@ -60,7 +60,6 @@ export class ReviewOrderPage implements OnInit {
   }
 
   comprarenGo() {
-    debugger;
     this.checkoutModel.Username = this.ordenCheckoutLocal.name;
     this.checkoutModel.Payment_method = 'Contraentrega';
     this.checkoutModel.Shipment_address = this.direccionRecibida;
