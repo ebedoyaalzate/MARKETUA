@@ -19,7 +19,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -42,4 +41,4 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
