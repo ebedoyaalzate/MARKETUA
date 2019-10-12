@@ -1,9 +1,9 @@
 import { Items } from './Items';
 
 export class Checkout {
-    public Items: Array<Items>;
-    public Payment_method: string;
-    public Shipment_address: string;
-    public Total: number;
-    public Username: string;
+    public items: Array<Items>;
+    public payment_method: string;
+    public shipment_address: string;
+    public total: number;
+    public username: string;
 }

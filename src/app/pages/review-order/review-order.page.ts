@@ -60,11 +60,12 @@ export class ReviewOrderPage implements OnInit {
   }
 
   comprarenGo() {
-    this.checkoutModel.Username = this.ordenCheckoutLocal.name;
-    this.checkoutModel.Payment_method = 'Contraentrega';
-    this.checkoutModel.Shipment_address = this.direccionRecibida;
-    this.checkoutModel.Total = parseInt(this.pagoCompleto);
-    this.checkoutModel.Items = new Array<Items>();
+    debugger;
+    this.checkoutModel.username = this.ordenCheckoutLocal.name;
+    this.checkoutModel.payment_method = 'Contraentrega';
+    this.checkoutModel.shipment_address = this.direccionRecibida;
+    this.checkoutModel.total = parseInt(this.pagoCompleto);
+    this.checkoutModel.items = new Array<Items>();
 
     this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
       compra => {
