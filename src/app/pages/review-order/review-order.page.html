@@ -8,43 +8,23 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-label padding>Enviar a</ion-label>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="clipboard" padding></ion-icon>
+        <h5><b>{{nombrePersona}}</b></h5>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
   <ion-label padding>Dirección de envío</ion-label>
   <ion-card>
     <ion-card-content>
       <ion-item>
         <ion-icon name="pin" padding></ion-icon>
         <h5><b>{{direccionRecibida}}</b></h5>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-label padding>Tipo Envio</ion-label>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-icon name="bus" padding></ion-icon>
-        <ion-list>
-          <ion-radio-group>
-            <ion-item>
-              <ion-label>Normal</ion-label>
-              <ion-radio slot="start" value="normal" checked></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Rapido</ion-label>
-              <ion-radio slot="start" value="rapido"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-label padding>Pedido</ion-label>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-icon name="cart" padding></ion-icon>
-        <h5>Lista de pedidos</h5>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -56,13 +36,14 @@
         <input name="accountId" type="hidden" value="512321">
         <input name="description" type="hidden" value="Ventas Marketua">
         <input name="referenceCode" type="hidden" value="{{codigoReferencia}}">
+        <input name="buyerFullName" type="hidden" value="{{nombrePersona}}">
         <input name="amount" type="hidden" value="{{pagoCompleto}}">
         <input name="tax" type="hidden" value="0">
         <input name="taxReturnBase" type="hidden" value="0">
         <input name="currency" type="hidden" value="{{tipoMoneda}}">
         <input name="signature" type="hidden" value="{{signatureMD5}}">
         <input name="test" type="hidden" value="1">
-        <input name="buyerEmail" type="hidden" value="test@test.com">
+        <input name="buyerEmail" type="hidden" value="{{buyerEmail}}">
         <input name="responseUrl" type="hidden" value="http://www.test.com/response">
         <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
         <ion-button (click)="pagarPayu()" size="large" expand="block">

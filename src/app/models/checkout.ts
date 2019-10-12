@@ -1,9 +1,9 @@
 import { Items } from './Items';
 
-export interface Checkout {
-    Items: Array<Items>;
-    Payment_method: string;
-    Shipment_address: string;
-    Total: string;
-    Username: string;
+export class Checkout {
+    public Items: Array<Items>;
+    public Payment_method: string;
+    public Shipment_address: string;
+    public Total: number;
+    public Username: string;
 }

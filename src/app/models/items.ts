@@ -1,4 +1,4 @@
-export interface Items {
-    Item_id: string;
-    Quantity: string;
+export class Items {
+    public Item_id: string;
+    public Quantity: string;
 }

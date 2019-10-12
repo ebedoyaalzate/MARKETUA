@@ -22,8 +22,8 @@ export class CheckoutPage implements OnInit {
 
   public departamentoCapturado: any = new Array();
   public ciudades: any = new Array();
-  public ciudadesDepartamentoCapturado: any = Array();
-  public ciudadesDepartamento: any = Array();
+  public ciudadesDepartamentoCapturado?: any = Array();
+  public ciudadesDepartamento?: any = Array();
   public direccionFormulario: string;
 
   ngOnInit() {
