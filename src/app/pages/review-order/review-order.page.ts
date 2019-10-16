@@ -21,13 +21,11 @@ export class ReviewOrderPage implements OnInit {
 
   checkoutModel = new Checkout();
 
-  item1: any;
-  item2: any;
   itemArray: any;
 
-  buyerEmail: String
+  buyerEmail: string;
   direccionRecibida: string;
-  pagoCompleto: string = '11000000';
+  pagoCompleto = 0;
   nombrePersona: string;
 
   productos: any;
@@ -44,7 +42,6 @@ export class ReviewOrderPage implements OnInit {
   ngOnInit() {
 
     this.getCar();
-    //this.findProduct();
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
     this.nombrePersona = this.ordenCheckoutLocal.name;
@@ -52,70 +49,40 @@ export class ReviewOrderPage implements OnInit {
 
     this.metodoEnvioFavorito = 'ContraEntega';
 
-    this.item1 = new Items();
-    this.item1.backend = 'GO';
-    this.item1.item_id = '1';
-    this.item1.quantity = '9000000';
-
-    this.item2 = new Items();
-    this.item2.backend = 'GO';
-    this.item2.item_id = '2';
-    this.item2.quantity = '2000000';
-
     this.itemArray = new Array<Items>();
-    this.itemArray.push(this.item1);
-    this.itemArray.push(this.item2);
-
   }
 
   findProduct(prodId: any) {
     this.productService.productDetail(prodId.id, prodId.prov).subscribe(res => {
-      this.product = this.product + res;
-      console.log("SOy find:" + JSON.stringify(res));
+      let itemCar = new Items();
+      itemCar.backend = prodId.prov;
+      itemCar.item_id = prodId.id.toString();
+      itemCar.quantity = prodId.units.toString();
+      this.itemArray.push(itemCar);
+      this.pagoCompleto = this.pagoCompleto + (parseInt(res.price) * prodId.units);
     });
   }
-
-  /* debugger;
-       this.productService.productDetail(prod.id, prod.prov).forEach(res => {
-         this.product = res;
-         console.log("SOy res:" + JSON.stringify(this.product));
-       });*/
 
   getCar() {
     this.carService.getCar()
-      .then(r => {
-        r.forEach(tt => {
-          console.log(tt);
-          this.findProduct(tt);
-        })
-      })
+      .then(items => {
+        items.forEach(item => {
+          this.findProduct(item);
+        });
+      });
   }
-
-
-  /*calcularValor() {
-    debugger;
-    let property: any;
-
-    //console.log(this.productos);
-    let cosita = this.carService.getCar().then(prod => {
-      this.productos = prod;
-    });
-    console.log("soy prod:" + this.productos);
-
-    console.log("soy prod:" + cosita);
-  }*/
 
   comprarenGo() {
     this.checkoutModel.username = this.ordenCheckoutLocal.name;
     this.checkoutModel.payment_method = this.metodoEnvioFavorito;
     this.checkoutModel.shipment_address = this.direccionRecibida;
-    this.checkoutModel.total = parseInt(this.pagoCompleto);
+    this.checkoutModel.total = this.pagoCompleto;
     this.checkoutModel.items = this.itemArray;
 
+    debugger;
     this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
       compra => {
         console.log('Compra exitosa para Go' + JSON.stringify(compra));
-        //this.pagarPayu();
       },
       err => {
         console.log(err);
@@ -125,6 +92,15 @@ export class ReviewOrderPage implements OnInit {
     this.checkoutService.checkoutFlask(this.checkoutModel).subscribe(
       compra => {
         console.log('Compra exitosa para Flask' + JSON.stringify(compra));
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+    this.checkoutService.checkoutRuby(this.checkoutModel).subscribe(
+      compra => {
+        console.log('Compra exitosa para Ruby' + JSON.stringify(compra));
       },
       err => {
         console.log(err);

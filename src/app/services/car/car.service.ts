@@ -51,10 +51,6 @@ export class CarService {
     return this.storage.get('car');
   }
 
-  getCar2(): Observable<any> {
-    return of(this.storage.get('car'));
-  }
-
   changeProducts() {
     this.subject.next();
   }
