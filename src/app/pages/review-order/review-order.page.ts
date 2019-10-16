@@ -68,24 +68,29 @@ export class ReviewOrderPage implements OnInit {
 
   }
 
-  /*findProduct() {
-    this.productService.productDetail(45, 'ruby').subscribe(res => {
-      this.product = res;
-      console.log("SOy find:" + JSON.stringify(this.product));
-    });
-  }*/
-
-  getCar() {
-    this.carService.getCar().then(prod => {
-      console.log('soy pro: ' + JSON.stringify(prod));
-      //this.productos = prod;
-      debugger;
-      this.productService.productDetail(prod.id, prod.prov).forEach(res => {
-        this.product = res;
-        console.log("SOy res:" + JSON.stringify(this.product));
-      });
+  findProduct(prodId: any) {
+    this.productService.productDetail(prodId.id, prodId.prov).subscribe(res => {
+      this.product = this.product + res;
+      console.log("SOy find:" + JSON.stringify(res));
     });
   }
+
+  /* debugger;
+       this.productService.productDetail(prod.id, prod.prov).forEach(res => {
+         this.product = res;
+         console.log("SOy res:" + JSON.stringify(this.product));
+       });*/
+
+  getCar() {
+    this.carService.getCar()
+      .then(r => {
+        r.forEach(tt => {
+          console.log(tt);
+          this.findProduct(tt);
+        })
+      })
+  }
+
 
   /*calcularValor() {
     debugger;

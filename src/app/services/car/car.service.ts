@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,11 +44,15 @@ export class CarService {
       const auxCar = val.filter(prod => prod.id != id || prod.prov !== prov);
       this.storage.set('car', auxCar);
     });
-    this.subject.next({id, prov});
+    this.subject.next({ id, prov });
   }
 
   getCar() {
     return this.storage.get('car');
+  }
+
+  getCar2(): Observable<any> {
+    return of(this.storage.get('car'));
   }
 
   changeProducts() {
