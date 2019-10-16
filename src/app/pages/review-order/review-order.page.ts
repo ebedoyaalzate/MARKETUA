@@ -94,7 +94,7 @@ export class ReviewOrderPage implements OnInit {
         console.log('Compra exitosa para Flask' + JSON.stringify(compra));
       },
       err => {
-        console.log(err);
+        console.log('Error flask:' + err);
       }
     );
 
@@ -103,7 +103,7 @@ export class ReviewOrderPage implements OnInit {
         console.log('Compra exitosa para Ruby' + JSON.stringify(compra));
       },
       err => {
-        console.log(err);
+        console.log('Error Ruby:' + err);
       }
     );
   }
