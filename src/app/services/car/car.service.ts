@@ -24,7 +24,7 @@ export class CarService {
 
   changeUnit(id: string, prov: string, units: number) {
     this.storage.get('car').then(val => {
-      val[0].units += 1;
+      val[0].units = units;
       this.storage.set('car', val);
     });
   }
