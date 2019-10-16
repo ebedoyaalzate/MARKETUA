@@ -34,7 +34,7 @@ export class AuthService {
       }
     );
    }
-
+   
      googleLogin() {
       if(this.platform.is('cordova')) {
         this.nativeGoogleLogin()
@@ -77,7 +77,4 @@ export class AuthService {
         this.afAuth.auth.signOut()
         .then((res) => this.router.navigate(['/']));
     }
-
-    
-    
 }
