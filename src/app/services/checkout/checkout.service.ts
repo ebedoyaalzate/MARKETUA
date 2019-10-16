@@ -27,6 +27,16 @@ export class CheckoutService {
       })
     };
     const compraJson = JSON.stringify(compra);
-    return this.http.post<Checkout>(`https://marketuaflask.herokuapp.com/checkout`, compraJson);
+    return this.http.post<Checkout>(`https://marketuaflask.herokuapp.com/checkout`, compraJson, httpOptions);
+  }
+
+  checkoutRuby(compra: Checkout): Observable<Checkout> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'idToken=123'
+      })
+    };
+    const compraJson = JSON.stringify(compra);
+    return this.http.post<Checkout>(`http://marketua-api.herokuapp.com/checkout`, compraJson, httpOptions);
   }
 }
