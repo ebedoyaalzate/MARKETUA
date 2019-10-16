@@ -18,32 +18,19 @@ export class CarService {
       units: 1,
       prov
     };
-    this.storage.get('car').then((car) => {
-      console.log(car);
-      car = car ? car : [];
-      car = car.filter(prod => prod.id != id || prod.prov !== prov);
-      car.push(prod);
-      console.log(car);
-      this.storage.set('car', car);
-    });
+    const car = [prod];
+    this.storage.set('car', car);
   }
 
   changeUnit(id: string, prov: string, units: number) {
     this.storage.get('car').then(val => {
-      val.forEach(prod => {
-        if (prod.id === id && prod.prov === prov) {
-          prod.units = units;
-        }
-      });
+      val[0].units += 1;
       this.storage.set('car', val);
     });
   }
 
   deleteProduct(id: string, prov: string) {
-    this.storage.get('car').then((val) => {
-      const auxCar = val.filter(prod => prod.id != id || prod.prov !== prov);
-      this.storage.set('car', auxCar);
-    });
+    this.storage.set('car', []);
     this.subject.next({id, prov});
   }
 
