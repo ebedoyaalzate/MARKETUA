@@ -7,6 +7,7 @@ import { Checkout } from 'src/app/models/checkout';
 import { CarService } from 'src/app/services/car/car.service';
 import { Items } from 'src/app/models/items';
 import { ProductDetail } from 'src/app/models/productDetail';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-review-order',
@@ -29,13 +30,21 @@ export class ReviewOrderPage implements OnInit {
   pagoCompleto: string = '11000000';
   nombrePersona: string;
 
-  productos: ProductDetail[];
+  productos: any;
 
   ordenCheckoutLocal: any;
 
-  constructor(private activateRoute: ActivatedRoute, private checkoutService: CheckoutService, private carService: CarService) {
+  product: ProductDetail;
+
+  constructor(private activateRoute: ActivatedRoute,
+    private checkoutService: CheckoutService,
+    private carService: CarService,
+    private productService: ProductService) {
   }
   ngOnInit() {
+
+    this.getCar();
+    //this.findProduct();
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
     this.nombrePersona = this.ordenCheckoutLocal.name;
@@ -57,6 +66,25 @@ export class ReviewOrderPage implements OnInit {
     this.itemArray.push(this.item1);
     this.itemArray.push(this.item2);
 
+  }
+
+  /*findProduct() {
+    this.productService.productDetail(45, 'ruby').subscribe(res => {
+      this.product = res;
+      console.log("SOy find:" + JSON.stringify(this.product));
+    });
+  }*/
+
+  getCar() {
+    this.carService.getCar().then(prod => {
+      console.log('soy pro: ' + JSON.stringify(prod));
+      //this.productos = prod;
+      debugger;
+      this.productService.productDetail(prod.id, prod.prov).forEach(res => {
+        this.product = res;
+        console.log("SOy res:" + JSON.stringify(this.product));
+      });
+    });
   }
 
   /*calcularValor() {
