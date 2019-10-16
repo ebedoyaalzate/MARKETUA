@@ -29,7 +29,37 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-row>
+  <ion-label padding>Metodo de Envío</ion-label>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <!-- <ion-radio-group [(ngModel)]="valor">
+          <ion-item>
+            <ion-label>ContraEntega</ion-label>
+            <ion-radio slot="start" value="contraentrega" checked>
+            </ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Normal</ion-label>
+            <ion-radio slot="start" value="normal"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Rapida</ion-label>
+            <ion-radio slot="start" value="Rapida"></ion-radio>
+          </ion-item>
+        </ion-radio-group> -->
+        <ion-radio-group [(ngModel)]="metodoEnvioFavorito">
+          <ion-item *ngFor="let metodo of metodosEnvio">
+            <ion-label>{{metodo}}</ion-label>
+            <ion-radio [value]="metodo">
+            </ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-row>
     <ion-col class="centrar">
       <form id='payu' method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
         <input name="merchantId" type="hidden" value="{{merchant}}">
@@ -51,6 +81,6 @@
         </ion-button>
       </form>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
 </ion-content>

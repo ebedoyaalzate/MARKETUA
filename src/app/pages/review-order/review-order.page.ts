@@ -15,6 +15,9 @@ import { ProductDetail } from 'src/app/models/productDetail';
 })
 export class ReviewOrderPage implements OnInit {
 
+  metodoEnvioFavorito: string;
+  metodosEnvio: string[] = ['ContraEntega', 'Normal', 'Rapida'];
+
   checkoutModel = new Checkout();
 
   item1: any;
@@ -23,12 +26,7 @@ export class ReviewOrderPage implements OnInit {
 
   buyerEmail: String
   direccionRecibida: string;
-  merchant: string = '508029';
   pagoCompleto: string = '11000000';
-  tipoMoneda: string = 'COP';
-  codigoReferencia: string;
-  signatureMD5: string;
-  apiKeyPrueba: string = '4Vj8eK4rloUd272L48hsrarnUA';
   nombrePersona: string;
 
   productos: ProductDetail[];
@@ -39,10 +37,11 @@ export class ReviewOrderPage implements OnInit {
   }
   ngOnInit() {
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
-    this.codigoReferencia = this.uuidv4();
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
     this.nombrePersona = this.ordenCheckoutLocal.name;
     this.buyerEmail = this.ordenCheckoutLocal.email;
+
+    this.metodoEnvioFavorito = 'ContraEntega';
 
     this.item1 = new Items();
     this.item1.backend = 'GO';
@@ -60,13 +59,6 @@ export class ReviewOrderPage implements OnInit {
 
   }
 
-  uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-
   /*calcularValor() {
     debugger;
     let property: any;
@@ -80,17 +72,9 @@ export class ReviewOrderPage implements OnInit {
     console.log("soy prod:" + cosita);
   }*/
 
-  pagarPayu() {
-    this.signatureMD5 = Md5.init(this.apiKeyPrueba + '~' + this.merchant + '~'
-      + this.codigoReferencia + '~' + this.pagoCompleto + '~' + this.tipoMoneda);
-    document.getElementById('payu')["submit"]();
-  }
-
   comprarenGo() {
-
-
     this.checkoutModel.username = this.ordenCheckoutLocal.name;
-    this.checkoutModel.payment_method = 'Contraentrega';
+    this.checkoutModel.payment_method = this.metodoEnvioFavorito;
     this.checkoutModel.shipment_address = this.direccionRecibida;
     this.checkoutModel.total = parseInt(this.pagoCompleto);
     this.checkoutModel.items = this.itemArray;
@@ -98,7 +82,7 @@ export class ReviewOrderPage implements OnInit {
     this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
       compra => {
         console.log('Compra exitosa para Go' + JSON.stringify(compra));
-        this.pagarPayu();
+        //this.pagarPayu();
       },
       err => {
         console.log(err);
