@@ -1,35 +1,29 @@
 import { TestBed } from '@angular/core/testing';
-import { CarService } from './car.service';
 import { HttpClientTestingModule,
   HttpTestingController } from '@angular/common/http/testing';
 
-import { Storage } from '@ionic/storage';
+import { UsersService } from './users.service';
 
-describe('CarService', () => {
+describe('UsersService', () => {
   let httpTestingController: HttpTestingController;
-  let service: CarService;
-  let storageSpy;
+  let service: UsersService;
 
   beforeEach(() => {
-    storageSpy = jasmine.createSpyObj('Storage', ['']);
     TestBed.configureTestingModule({
-      providers: [CarService,
-      {provide: Storage, useValue: storageSpy}],
+      providers: [UsersService],
       imports: [HttpClientTestingModule]
-      
     });
 
+    // We inject our service (which imports the HttpClient) and the Test Controller
     httpTestingController = TestBed.get(HttpTestingController);
-    service = TestBed.get(CarService);
+    service = TestBed.get(UsersService);
   });
   
   afterEach(() => {
     httpTestingController.verify();
-    httpTestingController.expectNone
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });
-
