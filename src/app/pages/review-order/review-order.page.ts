@@ -8,6 +8,7 @@ import { CarService } from 'src/app/services/car/car.service';
 import { Items } from 'src/app/models/items';
 import { ProductDetail } from 'src/app/models/productDetail';
 import { ProductService } from 'src/app/services/product/product.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-review-order',
@@ -37,15 +38,16 @@ export class ReviewOrderPage implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private carService: CarService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private auth: AuthService) {
   }
   ngOnInit() {
 
     this.getCar();
     this.direccionRecibida = this.activateRoute.snapshot.paramMap.get('direccion');
     this.ordenCheckoutLocal = JSON.parse(localStorage['checkoutLocal']);
-    this.nombrePersona = this.ordenCheckoutLocal.name;
-    this.buyerEmail = this.ordenCheckoutLocal.email;
+    this.nombrePersona = this.auth.userDetails.displayName;
+    this.buyerEmail = this.auth.userDetails.email;
 
     this.metodoEnvioFavorito = 'ContraEntega';
 
@@ -79,15 +81,7 @@ export class ReviewOrderPage implements OnInit {
     this.checkoutModel.total = this.pagoCompleto;
     this.checkoutModel.items = this.itemArray;
 
-    debugger;
-    this.checkoutService.checkoutGo(this.checkoutModel).subscribe(
-      compra => {
-        console.log('Compra exitosa para Go' + JSON.stringify(compra));
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.checkoutService.checkoutGo(this.checkoutModel);
 
     this.checkoutService.checkoutFlask(this.checkoutModel).subscribe(
       compra => {
@@ -103,9 +97,9 @@ export class ReviewOrderPage implements OnInit {
         console.log('Compra exitosa para Ruby' + JSON.stringify(compra));
       },
       err => {
-        console.log('Error Ruby:' + JSON.stringify(err));
+        console.log('Error Ruby:');
+        console.log(err);
       }
     );
   }
-
 }
