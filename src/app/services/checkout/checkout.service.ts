@@ -17,7 +17,7 @@ export class CheckoutService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'idToken': this.idToken
+      //'idToken': this.idToken
     })
   };
 
