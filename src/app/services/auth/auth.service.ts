@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   public user: Observable<firebase.User>;
-  public userIdToken: any;
+  public userIdToken: string;
   public userDetails: any;
   
   constructor(
@@ -27,6 +27,7 @@ export class AuthService {
         if (user) {
           this.userDetails = user;
           this.userIdToken = user['ma'];
+          console.log(this.userIdToken);
         }
         else {
           this.userDetails = null;
