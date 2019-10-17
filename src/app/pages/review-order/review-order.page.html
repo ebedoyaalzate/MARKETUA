@@ -29,27 +29,40 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-label padding>Metodo de Envío</ion-label>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <!-- <ion-radio-group [(ngModel)]="valor">
+          <ion-item>
+            <ion-label>ContraEntega</ion-label>
+            <ion-radio slot="start" value="contraentrega" checked>
+            </ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Normal</ion-label>
+            <ion-radio slot="start" value="normal"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Rapida</ion-label>
+            <ion-radio slot="start" value="Rapida"></ion-radio>
+          </ion-item>
+        </ion-radio-group> -->
+        <ion-radio-group [(ngModel)]="metodoEnvioFavorito">
+          <ion-item *ngFor="let metodo of metodosEnvio">
+            <ion-label>{{metodo}}</ion-label>
+            <ion-radio [value]="metodo">
+            </ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
   <ion-row>
     <ion-col class="centrar">
-      <form id='payu' method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-        <input name="merchantId" type="hidden" value="{{merchant}}">
-        <input name="accountId" type="hidden" value="512321">
-        <input name="description" type="hidden" value="Ventas Marketua">
-        <input name="referenceCode" type="hidden" value="{{codigoReferencia}}">
-        <input name="buyerFullName" type="hidden" value="{{nombrePersona}}">
-        <input name="amount" type="hidden" value="{{pagoCompleto}}">
-        <input name="tax" type="hidden" value="0">
-        <input name="taxReturnBase" type="hidden" value="0">
-        <input name="currency" type="hidden" value="{{tipoMoneda}}">
-        <input name="signature" type="hidden" value="{{signatureMD5}}">
-        <input name="test" type="hidden" value="1">
-        <input name="buyerEmail" type="hidden" value="{{buyerEmail}}">
-        <input name="responseUrl" type="hidden" value="http://www.test.com/response">
-        <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
-        <ion-button (click)="comprarenGo()" size="large">
-          <ion-icon ios="ios-cash" md="md-cash" padding></ion-icon>Pagar
-        </ion-button>
-      </form>
+      <ion-button class="centrar" (click)="comprarenGo()" size="large">
+        <ion-icon ios="ios-cash" md="md-cash" padding></ion-icon>Pagar
+      </ion-button>
     </ion-col>
   </ion-row>
 

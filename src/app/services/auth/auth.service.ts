@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   public user: Observable<firebase.User>;
+  public userIdToken: string;
   public userDetails: any;
   
   constructor(
@@ -21,20 +22,20 @@ export class AuthService {
     {
       this.user = this.afAuth.authState
 
-      this.user.subscribe(
-        (user) => {
-          if (user) {
-            this.userDetails = user;
-            console.log(this.userDetails);
-          }
-          else {
-            this.userDetails = null;
-          }
+     this.user.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          this.userIdToken = user['ma'];
+          console.log(this.userIdToken);
         }
-      );
-     }
-
-  
+        else {
+          this.userDetails = null;
+        }
+      }
+    );
+   }
+   
      googleLogin() {
       if(this.platform.is('cordova')) {
         this.nativeGoogleLogin()
@@ -73,13 +74,8 @@ export class AuthService {
       }
     }
 
-    isLoggedIn(){
-      //TODO
-    }
-
     logout() {
         this.afAuth.auth.signOut()
         .then((res) => this.router.navigate(['/']));
-      }
-    
+    }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,33 +18,20 @@ export class CarService {
       units: 1,
       prov
     };
-    this.storage.get('car').then((car) => {
-      console.log(car);
-      car = car ? car : [];
-      car = car.filter(prod => prod.id != id || prod.prov !== prov);
-      car.push(prod);
-      console.log(car);
-      this.storage.set('car', car);
-    });
+    const car = [prod];
+    this.storage.set('car', car);
   }
 
   changeUnit(id: string, prov: string, units: number) {
     this.storage.get('car').then(val => {
-      val.forEach(prod => {
-        if (prod.id === id && prod.prov === prov) {
-          prod.units = units;
-        }
-      });
+      val[0].units = units;
       this.storage.set('car', val);
     });
   }
 
   deleteProduct(id: string, prov: string) {
-    this.storage.get('car').then((val) => {
-      const auxCar = val.filter(prod => prod.id != id || prod.prov !== prov);
-      this.storage.set('car', auxCar);
-    });
-    this.subject.next({id, prov});
+    this.storage.set('car', []);
+    this.subject.next({ id, prov });
   }
 
   getCar() {
