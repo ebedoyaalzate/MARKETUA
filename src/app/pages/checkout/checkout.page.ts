@@ -11,8 +11,10 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class CheckoutPage implements OnInit {
 
+  username = this.auth.userDetails.email.split('@')[0];
+
   checkoutForm: any = {
-    name: this.auth.userDetails.displayName,
+    name: this.username,
     email: this.auth.userDetails.email,
     phone: ''
   };
