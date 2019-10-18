@@ -15,8 +15,7 @@ describe('CarService', () => {
     TestBed.configureTestingModule({
       providers: [CarService,
       {provide: Storage, useValue: storageSpy}],
-      imports: [HttpClientTestingModule]
-      
+      imports: [HttpClientTestingModule] 
     });
 
     httpTestingController = TestBed.get(HttpTestingController);
@@ -25,7 +24,7 @@ describe('CarService', () => {
   
   afterEach(() => {
     httpTestingController.verify();
-    httpTestingController.expectNone
+    httpTestingController.expectNone;
   });
 
   it('should be created', () => {

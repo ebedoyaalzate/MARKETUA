@@ -17,13 +17,27 @@ import { environment } from '../../../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 
+import { ProductService } from 'src/app/services/product/product.service';
+import { MenuController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
+  let productServiceSpy, popoverControllerSpy,menuControllerSpy,authServiceSpy, angularFireAuthSpy;
 
   beforeEach(async(() => {
+
+    productServiceSpy = jasmine.createSpyObj('ProductService', ['']);
+    popoverControllerSpy = jasmine.createSpyObj('PopoverController', ['']);
+    menuControllerSpy = jasmine.createSpyObj('MenuController', ['']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['']);
+    angularFireAuthSpy = jasmine.createSpyObj('AngularFireAuth', ['']);
+
     TestBed.configureTestingModule({
       declarations: [
         HomePage,
@@ -45,7 +59,12 @@ describe('HomePage', () => {
           }
         ])],
         providers: [
-          GooglePlus
+          GooglePlus,
+          {provide: ProductService, useValue: productServiceSpy},
+          {provide: PopoverController, useValue: popoverControllerSpy},
+          {provide: MenuController, useValue: menuControllerSpy},
+          {provide: AuthService, useValue: authServiceSpy},
+          {provide: AngularFireAuth, useValue: angularFireAuthSpy},
         ]
     }).compileComponents();
 
