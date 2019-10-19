@@ -66,7 +66,14 @@ export class CarService {
     if (formatCar.items[0].backend === 'ruby') {
       return this.http.post<any>('http://marketua-develop-api.herokuapp.com/save-cart/', formatCar);
     } else if (formatCar.items[0].backend === 'go') {
-      return this.http.post<any>('https://marketua-go-api.herokuapp.com/save-cart', formatCar);
+      fetch('https://marketua-go-api.herokuapp.com/save-cart', {
+        method: 'POST',
+        mode: 'no-cors' ,
+          body: JSON.stringify(formatCar),
+          headers: new Headers({ 'idToken':this.authService.userIdToken})
+      }).then(res => {
+        console.log(res);
+      });
     } else if (formatCar.items[0].backend === 'flask') {
       return this.http.post<any>('https://marketuaflask.herokuapp.com/save-cart/', formatCar);
     }
