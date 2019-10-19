@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CountryService } from 'src/app/services/country/country.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -10,14 +11,17 @@ import { Router } from '@angular/router';
 })
 export class CheckoutPage implements OnInit {
 
+  username = this.auth.userDetails.email.split('@')[0];
+
   checkoutForm: any = {
-    name: '',
-    email: '',
+    name: this.username,
+    email: this.auth.userDetails.email,
     phone: ''
   };
 
-  constructor(private countryApi: CountryService, private router: Router) {
-
+  constructor(private countryApi: CountryService,
+              private router: Router,
+              public auth: AuthService) {
   }
 
   public departamentoCapturado: any = new Array();

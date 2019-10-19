@@ -9,11 +9,11 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getOrdersGo(username: string) {
-    return this.http.get<any>(`https://marketua-go-api.herokuapp.com/orders/edison`)
+    return this.http.get<any>(`https://marketua-go-api.herokuapp.com/orders/${username}`)
   }
 
   getOrdersRuby(username: string) {
-    return this.http.get<any>(`http://marketua-api.herokuapp.com/orders/${username}`)
+    return this.http.get<any>(`http://marketua-develop-api.herokuapp.com/orders/${username}`)
   }
 
   getOrdersFlask(username: string) {

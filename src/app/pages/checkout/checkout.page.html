@@ -16,24 +16,11 @@
             <h3>Billing Address</h3>
           </div>
           <div padding>
+            <ion-item>{{auth.userDetails.displayName}}</ion-item>
+            <ion-item>{{auth.userDetails.email}}</ion-item>
             <ion-item>
-              <ion-input name="name" type="text" placeholder="Name" [(ngModel)]="checkoutForm.name" required>
-              </ion-input>
+              <ion-input name="phone" type="number" placeholder="Telephone" [(ngModel)]="checkoutForm.phone" required></ion-input>
             </ion-item>
-            <ion-row size-md="12" size-lg="12" size-xs="12">
-              <ion-col size-md="6" size-lg="5" size-xs="6">
-                <ion-item>
-                  <ion-input name="email" type="email" placeholder="Email" [(ngModel)]="checkoutForm.email" required>
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size-md="6" size-lg="5" size-xs="6">
-                <ion-item>
-                  <ion-input name="phone" type="number" placeholder="Telephone" [(ngModel)]="checkoutForm.phone"
-                    required></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
             <ion-item>
               <ion-input name="address" type="text" placeholder="Address" [(ngModel)]="direccionFormulario" required>
               </ion-input>

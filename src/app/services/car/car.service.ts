@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,11 @@ export class CarService {
   private subject = new Subject<any>();
   public changes = this.subject.asObservable();
 
-  constructor(private storage: Storage) { }
+  constructor(
+    private storage: Storage,
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
   addToCar(id: string, prov: string) {
     const prod = {
@@ -18,33 +25,20 @@ export class CarService {
       units: 1,
       prov
     };
-    this.storage.get('car').then((car) => {
-      console.log(car);
-      car = car ? car : [];
-      car = car.filter(prod => prod.id != id || prod.prov !== prov);
-      car.push(prod);
-      console.log(car);
-      this.storage.set('car', car);
-    });
+    const car = [prod];
+    this.storage.set('car', car);
   }
 
   changeUnit(id: string, prov: string, units: number) {
     this.storage.get('car').then(val => {
-      val.forEach(prod => {
-        if (prod.id === id && prod.prov === prov) {
-          prod.units = units;
-        }
-      });
+      val[0].units = units;
       this.storage.set('car', val);
     });
   }
 
   deleteProduct(id: string, prov: string) {
-    this.storage.get('car').then((val) => {
-      const auxCar = val.filter(prod => prod.id != id || prod.prov !== prov);
-      this.storage.set('car', auxCar);
-    });
-    this.subject.next({id, prov});
+    this.storage.set('car', []);
+    this.subject.next({ id, prov });
   }
 
   getCar() {
@@ -57,5 +51,31 @@ export class CarService {
 
   deleteCar() {
     this.storage.clear();
+  }
+
+  saveCar(car) {
+    let formatCar
+    formatCar = {
+      items: [{
+        item_id: car[0].id,
+        quantity: car[0].units,
+        backend: car[0].prov
+      }],
+      username: this.authService.userDetails.email.split('@')[0]
+    };
+    if (formatCar.items[0].backend === 'ruby') {
+      return this.http.post<any>('http://marketua-develop-api.herokuapp.com/save-cart/', formatCar);
+    } else if (formatCar.items[0].backend === 'go') {
+      fetch('https://marketua-go-api.herokuapp.com/save-cart', {
+        method: 'POST',
+        mode: 'no-cors' ,
+          body: JSON.stringify(formatCar),
+          headers: new Headers({ 'idToken':this.authService.userIdToken})
+      }).then(res => {
+        console.log(res);
+      });
+    } else if (formatCar.items[0].backend === 'flask') {
+      return this.http.post<any>('https://marketuaflask.herokuapp.com/save-cart/', formatCar);
+    }
   }
 }

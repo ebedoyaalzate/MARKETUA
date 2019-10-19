@@ -37,9 +37,7 @@ export class LoginPage implements OnInit {
    }
 
   ngOnInit() {
-    this.authService.isLoggedIn();
   }
-
 
   googleLogin() {
     this.authService.googleLogin()

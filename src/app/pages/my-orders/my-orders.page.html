@@ -15,9 +15,10 @@
 
     </ion-card-header>
     <ion-card-content>
-      <p>Metod de pago: {{ord.payment_method}}</p>
+      <p>Metodo de pago: {{ord.payment_method}}</p>
       <div *ngFor="let item of ord.items">
-        <ion-label>item: {{item.item_id}} </ion-label>
+        <ion-label>item: {{item.id}} </ion-label>
+        <ion-label> {{item.name}} </ion-label>
         <ion-label>Cantidad: {{item.quantity}}</ion-label>
       </div>
     </ion-card-content>
