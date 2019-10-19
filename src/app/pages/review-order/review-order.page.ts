@@ -7,6 +7,10 @@ import { Items } from 'src/app/models/items';
 import { ProductDetail } from 'src/app/models/productDetail';
 import { ProductService } from 'src/app/services/product/product.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-review-order',
@@ -16,7 +20,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class ReviewOrderPage implements OnInit {
 
   metodoEnvioFavorito: string;
-  metodosEnvio: string[] = ['ContraEntega', 'Normal', 'Rapida'];
+  metodosEnvio: string[] = ['ContraEntega'];
 
   checkoutModel = new Checkout();
 
@@ -37,7 +41,10 @@ export class ReviewOrderPage implements OnInit {
     private checkoutService: CheckoutService,
     private carService: CarService,
     private productService: ProductService,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private alertController: AlertController,
+    private router: Router
+    ) {
   }
   ngOnInit() {
 
@@ -89,12 +96,29 @@ export class ReviewOrderPage implements OnInit {
       compra => {
         console.log('Compra exitosa para Ruby' );
         console.log(compra);
-        
       },
       err => {
         console.log('Error Ruby:');
         console.log(err);
       }
     );
+    this.presentAlert()
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Exito',
+      message: 'La compra ha sido exitosa',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'primary',
+          handler: () => {
+            this.router.navigate(['/home']);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }
