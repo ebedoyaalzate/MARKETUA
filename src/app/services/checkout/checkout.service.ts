@@ -28,17 +28,22 @@ export class CheckoutService {
           body: JSON.stringify(compra),
           headers: new Headers({ 'idToken':this.idToken}),
       }).then(res => {
-      console.log('Compra exitosa para Go' + JSON.stringify(compra));
+      console.log('Compra exitosa para Go' + JSON.stringify(compra));
         });
       }
 
-  checkoutFlask(compra: Checkout): Observable<Checkout> {
-    const compraJson = JSON.stringify(compra);
-    return this.http.post<Checkout>(`https://marketuaflask.herokuapp.com/checkout`, compraJson, this.httpOptions);
+  checkoutFlask(compra: Checkout) {
+    fetch('https://marketuaflask.herokuapp.com/checkout/', {
+      method: 'POST',
+          mode: 'no-cors' ,
+          body: JSON.stringify(compra),
+      }).then(res => {
+      console.log('Compra exitosa para Flask' + JSON.stringify(compra));
+        });
   }
 
   checkoutRuby(compra: Checkout): Observable<Checkout> {
     const compraJson = JSON.stringify(compra);
-    return this.http.post<Checkout>(`https://marketua-develop-api.herokuapp.com/checkout`, compraJson, this.httpOptions);
+    return this.http.post<Checkout>(`https://marketua-develop-api.herokuapp.com/checkout/`, compraJson, this.httpOptions);
   }
 }

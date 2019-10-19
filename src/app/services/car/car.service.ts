@@ -68,7 +68,7 @@ export class CarService {
     } else if (formatCar.items[0].backend === 'go') {
       return this.http.post<any>('https://marketua-go-api.herokuapp.com/save-cart', formatCar);
     } else if (formatCar.items[0].backend === 'flask') {
-      return this.http.post<any>('https://marketuaflask.herokuapp.com/save-cart', formatCar);
+      return this.http.post<any>('https://marketuaflask.herokuapp.com/save-cart/', formatCar);
     }
   }
 }

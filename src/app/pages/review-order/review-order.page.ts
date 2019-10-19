@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Md5 } from "md5-typescript";
-import { Form, FormBuilder } from '@angular/forms';
 import { CheckoutService } from 'src/app/services/checkout/checkout.service';
 import { Checkout } from 'src/app/models/checkout';
 import { CarService } from 'src/app/services/car/car.service';
@@ -80,21 +78,18 @@ export class ReviewOrderPage implements OnInit {
     this.checkoutModel.shipment_address = this.direccionRecibida;
     this.checkoutModel.total = this.pagoCompleto;
     this.checkoutModel.items = this.itemArray;
+    console.log(this.checkoutModel);
+    
 
     this.checkoutService.checkoutGo(this.checkoutModel);
 
-    this.checkoutService.checkoutFlask(this.checkoutModel).subscribe(
-      compra => {
-        console.log('Compra exitosa para Flask' + JSON.stringify(compra));
-      },
-      err => {
-        console.log('Error flask:' + JSON.stringify(err));
-      }
-    );
+    this.checkoutService.checkoutFlask(this.checkoutModel);
 
     this.checkoutService.checkoutRuby(this.checkoutModel).subscribe(
       compra => {
-        console.log('Compra exitosa para Ruby' + JSON.stringify(compra));
+        console.log('Compra exitosa para Ruby' );
+        console.log(compra);
+        
       },
       err => {
         console.log('Error Ruby:');
