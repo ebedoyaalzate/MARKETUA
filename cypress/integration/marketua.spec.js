@@ -43,7 +43,7 @@ describe('Marketua tests', function() {
             .click()
         cy.get(':nth-child(2) > .card')
             .click()
-            //me falta que si cargue y validar la url
+           
     })
     
     it('Agregar carrito desde buscar', function() {
@@ -52,9 +52,7 @@ describe('Marketua tests', function() {
             .click()
         cy.get(':nth-child(1) > .card > .content > .button')
             .click()
-        cy.get('.alert-button-inner')
-            .click()
-        //falta poder ver que si diga exitoso
+        
     })
 
     it('Ver carrito', function() {
@@ -63,11 +61,10 @@ describe('Marketua tests', function() {
             .click()
         cy.get(':nth-child(1) > .card > .content > .button')
             .click()
-        //cy.contains('Exitoso')
         cy.get('.footer-md > .ion-color')
             .click()
         cy.url().should('eq', 'http://localhost:8100/car')
-        //falta poder ver que si diga exitoso y tenga algo
+        
     })
-    
+  
 })
