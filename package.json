@@ -38,7 +38,7 @@
     "cordova-sqlite-storage": "^3.2.1",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.1.0",
     "md5-typescript": "^1.0.5",
     "morgan": "^1.9.1",
